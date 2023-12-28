@@ -12,6 +12,9 @@ interface TransactionDao : BaseDao<TransactionEntity> {
     @Query("SELECT * FROM  `transaction` ORDER BY txFinish")
     fun get(): Flow<List<TransactionEntity>>
 
+    @Query("SELECT COUNT(*) FROM `transaction`")
+    fun getCount(): Int
+
     @Query("SELECT * FROM  `transaction` WHERE id = :id")
     fun getById(id: Long): Flow<TransactionEntity?>
 

@@ -20,6 +20,10 @@ class TransactionRepositoryImpl @Inject constructor(
         transactionDao.insert(transactionEntityMapper.toLocal(model))
     }
 
+    override suspend fun getTransactionCount(): Int {
+        return transactionDao.getCount()
+    }
+
     override suspend fun fetchRemoteTransactions(): List<TransactionDomainModel> {
         return try {
             val list = service.getMockTransactions()

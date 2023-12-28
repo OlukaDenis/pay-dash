@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PayDash</string>
+    <string name="first_time_use_text">Preparing app for the first time use. This can take a while</string>
 </resources>
