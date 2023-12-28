@@ -10,9 +10,14 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            setUrl("https://jitpack.io")
+        }
     }
 }
 
 rootProject.name = "PayDash"
 include(":app")
+include(":domain")
+include(":data")
  
