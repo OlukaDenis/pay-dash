@@ -55,15 +55,20 @@ dependencies {
 
     implementation("androidx.activity:activity-ktx:1.8.2")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation("androidx.navigation:navigation-runtime-ktx:2.7.6")
 
     implementation("com.google.dagger:hilt-android:2.48")
     ksp("com.google.dagger:hilt-android-compiler:2.48")
     implementation("androidx.hilt:hilt-work:1.0.0")
     ksp("androidx.hilt:hilt-compiler:1.0.0")
     implementation("androidx.work:work-runtime-ktx:2.8.1")
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
     implementation("com.jakewharton.timber:timber:5.0.1")
+
+    implementation("com.google.code.gson:gson:2.10.1")
+
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
 
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }
