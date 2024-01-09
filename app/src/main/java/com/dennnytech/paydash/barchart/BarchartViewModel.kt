@@ -5,11 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dennytech.domain.models.ServiceAmountDomainModel
 import com.dennytech.domain.usecases.transactions.GetServiceAmountDataUseCase
-import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.toCollection
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -20,18 +19,19 @@ class BarchartViewModel @Inject constructor(
 
     val data: MutableLiveData<List<ServiceAmountDomainModel>> = MutableLiveData()
 
+    init {
+        initialize()
+    }
+
     fun onEvent(event: BarChartEvent) {
         when (event) {
-            is BarChartEvent.Init -> init()
+            is BarChartEvent.Init -> initialize()
         }
     }
 
-    private fun init() {
-        viewModelScope.launch {
-            getServiceAmountDataUseCase().collect {
-                data.value = it
-            }
-        }
+    private fun initialize() {
+        Timber.d("Initialize called...")
+        data.value = runBlocking { getServiceAmountDataUseCase().first() }
     }
 }
 

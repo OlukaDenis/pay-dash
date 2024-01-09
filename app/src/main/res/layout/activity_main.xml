@@ -14,11 +14,30 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-   <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/mpLineChart"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200dp"
+        android:layout_marginTop="@dimen/_20dp"
+        android:name="com.dennnytech.paydash.linechart.LineChartFragment"
+        app:layout_constraintTop_toBottomOf="@id/mpBarchart"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/mpPieChart"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200dp"
+        android:layout_marginTop="@dimen/_20dp"
+        android:name="com.dennnytech.paydash.piechart.PieChartFragment"
+        app:layout_constraintTop_toBottomOf="@id/mpLineChart"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
        android:id="@+id/clLoading"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:padding="@dimen/spacing_20"
+       android:padding="@dimen/_20dp"
        android:visibility="gone"
        app:layout_constraintBottom_toBottomOf="parent"
        app:layout_constraintEnd_toEndOf="parent"

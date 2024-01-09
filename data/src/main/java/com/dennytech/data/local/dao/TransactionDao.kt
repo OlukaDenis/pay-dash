@@ -5,6 +5,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import com.dennytech.data.base.BaseDao
 import com.dennytech.data.local.models.TransactionEntity
+import com.dennytech.domain.models.CategoryAmountDomainModel
 import com.dennytech.domain.models.ServiceAmountDomainModel
 import kotlinx.coroutines.flow.Flow
 
@@ -16,9 +17,19 @@ interface TransactionDao : BaseDao<TransactionEntity> {
 
     @Transaction
     @Query(
-        "SELECT service, SUM(amount) AS totalAmount FROM  `transaction` GROUP BY service"
+        "SELECT service, txFinish AS period, SUM(amount) AS totalAmount " +
+                "FROM  `transaction` " +
+                "GROUP BY service"
     )
     fun getServiceAmountGroup(): Flow<List<ServiceAmountDomainModel>>
+
+    @Transaction
+    @Query(
+        "SELECT category, txFinish AS period, SUM(amount) AS totalAmount " +
+                "FROM  `transaction` " +
+                "GROUP BY category"
+    )
+    fun getCategoryAmountGroup(): Flow<List<CategoryAmountDomainModel>>
 
     @Query("SELECT COUNT(*) FROM `transaction`")
     fun getCount(): Int
