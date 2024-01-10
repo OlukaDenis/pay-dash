@@ -11,6 +11,7 @@ import com.dennnytech.paydash.base.BaseFragment
 import com.dennnytech.paydash.databinding.FragmentPieChartBinding
 import com.dennnytech.paydash.ui.linechart.LineChartViewModel
 import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -40,10 +41,10 @@ class PieChartFragment : BaseFragment<FragmentPieChartBinding>(FragmentPieChartB
                 val popupMenu = PopupMenu(requireContext(), acibFilterPie)
                 popupMenu.menuInflater.inflate(R.menu.revenue_menu, popupMenu.menu)
                 popupMenu.setOnMenuItemClickListener {
-                    when(it.itemId) {
+                    when (it.itemId) {
                         R.id.byCategory -> viewModel.onEvent(PieChartEvent.FilterByCategory)
                         R.id.byService -> viewModel.onEvent(PieChartEvent.FilterByService)
-                        R.id.byType -> Timber.d("Type")
+                        R.id.byType -> viewModel.onEvent(PieChartEvent.FilterByType)
                     }
                     true
                 }
@@ -66,51 +67,50 @@ class PieChartFragment : BaseFragment<FragmentPieChartBinding>(FragmentPieChartB
     }
 
     private fun configureChart() {
-       with(binding) {
-           chart.setUsePercentValues(true)
-           chart.getDescription().setEnabled(false)
-           chart.setExtraOffsets(5f, 10f, 5f, 5f)
+        with(binding) {
+            chart.setUsePercentValues(true)
 
-           chart.setDragDecelerationFrictionCoef(0.95f)
+            chart.description = buildDescription()
+            chart.setExtraOffsets(5f, 10f, 5f, 5f)
 
-           chart.setDrawHoleEnabled(true)
-           chart.setHoleColor(Color.WHITE)
+            chart.dragDecelerationFrictionCoef = 0.95f
+            chart.setTouchEnabled(true)
 
-           chart.setTransparentCircleColor(Color.WHITE)
-           chart.setTransparentCircleAlpha(110)
+            chart.isDrawHoleEnabled = true
+            chart.setHoleColor(Color.WHITE)
 
-           chart.setHoleRadius(58f)
-           chart.setTransparentCircleRadius(61f)
+            chart.setTransparentCircleColor(Color.WHITE)
+            chart.setTransparentCircleAlpha(110)
 
-           chart.setDrawCenterText(true)
+            chart.holeRadius = 58f
+            chart.transparentCircleRadius = 61f
 
-           chart.setRotationAngle(0f)
-           // enable rotation of the chart by touch
-           // enable rotation of the chart by touch
-           chart.setRotationEnabled(true)
-           chart.setHighlightPerTapEnabled(true)
+            chart.setDrawCenterText(true)
+
+            chart.rotationAngle = 0f
+            chart.isRotationEnabled = true
+            chart.isHighlightPerTapEnabled = true
 
 
-           // add a selection listener
-//           chart.setOnChartValueSelectedListener(this)
+            chart.animateY(1400, Easing.EaseInOutQuad)
 
-           chart.animateY(1400, Easing.EaseInOutQuad)
-           // chart.spin(2000, 0, 360);
+            val l: Legend = chart.legend
+            l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+            l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+            l.orientation = Legend.LegendOrientation.VERTICAL
+            l.setDrawInside(false)
 
-           // chart.spin(2000, 0, 360);
-           val l: Legend = chart.getLegend()
-           l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
-           l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
-           l.orientation = Legend.LegendOrientation.VERTICAL
-           l.setDrawInside(false)
-           l.xEntrySpace = 7f
-           l.yEntrySpace = 0f
-           l.yOffset = 0f
+            // entry label styling
+            chart.setEntryLabelColor(Color.WHITE)
+            chart.setEntryLabelTextSize(0f) // turn off labels
+        }
+    }
 
-           // entry label styling
-           chart.setEntryLabelColor(Color.WHITE)
-           chart.setEntryLabelTextSize(12f)
-       }
+    private fun buildDescription(): Description {
+        val description = Description()
+        description.text = "Revenue Data"
+
+        return description;
     }
 
     private fun drawData(entries: ArrayList<PieEntry>) {
@@ -122,7 +122,6 @@ class PieChartFragment : BaseFragment<FragmentPieChartBinding>(FragmentPieChartB
             dataSet.iconsOffset = MPPointF(0f, 40f)
             dataSet.selectionShift = 5f
 
-            // add a lot of colors
             val colors = ArrayList<Int>()
             for (c in ColorTemplate.JOYFUL_COLORS) colors.add(c)
             for (c in ColorTemplate.COLORFUL_COLORS) colors.add(c)
@@ -131,11 +130,11 @@ class PieChartFragment : BaseFragment<FragmentPieChartBinding>(FragmentPieChartB
             dataSet.selectionShift = 0f;
             val data = PieData(dataSet)
             data.setValueFormatter(PercentFormatter())
-            data.setValueTextSize(11f)
+            data.setValueTextSize(0f) // turn off value text
             data.setValueTextColor(Color.WHITE)
+
             chart.data = data
 
-            // undo all highlights
             chart.highlightValues(null)
             chart.invalidate()
         }
