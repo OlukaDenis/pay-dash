@@ -1,9 +1,9 @@
 # PayDash #
 
-PayDash is and android application that displays visualization of transactions
+PayDash is an android application that displays visualization of transactions
 
 ## Screenshots ##
-![rainy](https://github.com/OlukaDenis/weatheapp-MADS04/assets/37341054/0a7120c3-6d08-4283-a48f-6ab6c1d45238)
+<img width="248" alt="Screenshot 2024-01-11 at 00 53 02" src="https://github.com/OlukaDenis/pay-dash/assets/37341054/74de6681-a6e0-42d7-be51-e404095c2a9d">
 
 
 ## Features
