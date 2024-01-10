@@ -1,4 +1,4 @@
-package com.dennnytech.paydash.linechart
+package com.dennnytech.paydash.ui.linechart
 
 import android.R.attr.fillColor
 import android.graphics.Color

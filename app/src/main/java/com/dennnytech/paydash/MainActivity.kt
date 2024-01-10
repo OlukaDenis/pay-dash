@@ -9,10 +9,10 @@ import android.os.Looper
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import com.dennnytech.paydash.barchart.BarChartEvent
-import com.dennnytech.paydash.barchart.BarchartViewModel
+import com.dennnytech.paydash.ui.barchart.BarChartEvent
+import com.dennnytech.paydash.ui.barchart.BarchartViewModel
 import com.dennnytech.paydash.databinding.ActivityMainBinding
-import com.dennnytech.paydash.linechart.LineChartViewModel
+import com.dennnytech.paydash.ui.linechart.LineChartViewModel
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis

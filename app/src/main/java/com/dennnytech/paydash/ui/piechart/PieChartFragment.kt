@@ -1,10 +1,15 @@
-package com.dennnytech.paydash.piechart
+package com.dennnytech.paydash.ui.piechart
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
+import android.widget.PopupMenu
+import androidx.fragment.app.viewModels
+import com.dennnytech.paydash.R
 import com.dennnytech.paydash.base.BaseFragment
 import com.dennnytech.paydash.databinding.FragmentPieChartBinding
+import com.dennnytech.paydash.ui.linechart.LineChartViewModel
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
@@ -13,22 +18,51 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.MPPointF
+import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
-
+@AndroidEntryPoint
 class PieChartFragment : BaseFragment<FragmentPieChartBinding>(FragmentPieChartBinding::inflate) {
 
-    private val parties = arrayOf(
-        "Party A", "Party B", "Party C", "Party D", "Party E", "Party F", "Party G", "Party H",
-        "Party I", "Party J", "Party K", "Party L", "Party M", "Party N", "Party O", "Party P",
-        "Party Q", "Party R", "Party S", "Party T", "Party U", "Party V", "Party W", "Party X",
-        "Party Y", "Party Z"
-    )
+    private val viewModel: PieChartViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         configureChart()
-        drawData(12, 12f)
+        observeData()
+        handleFilters()
+    }
+
+    private fun handleFilters() {
+        with(binding) {
+            acibFilterPie.setOnClickListener {
+                val popupMenu = PopupMenu(requireContext(), acibFilterPie)
+                popupMenu.menuInflater.inflate(R.menu.revenue_menu, popupMenu.menu)
+                popupMenu.setOnMenuItemClickListener {
+                    when(it.itemId) {
+                        R.id.byCategory -> viewModel.onEvent(PieChartEvent.FilterByCategory)
+                        R.id.byService -> viewModel.onEvent(PieChartEvent.FilterByService)
+                        R.id.byType -> Timber.d("Type")
+                    }
+                    true
+                }
+
+                popupMenu.show()
+            }
+        }
+    }
+
+    private fun observeData() {
+        viewModel.data.observe(viewLifecycleOwner) {
+            val entries = ArrayList<PieEntry>()
+
+            it.mapIndexed { _, model ->
+                entries.add(PieEntry(model.amount, model.label))
+            }
+
+            drawData(entries)
+        }
     }
 
     private fun configureChart() {
@@ -79,21 +113,10 @@ class PieChartFragment : BaseFragment<FragmentPieChartBinding>(FragmentPieChartB
        }
     }
 
-    private fun drawData(count: Int, range: Float) {
+    private fun drawData(entries: ArrayList<PieEntry>) {
         with(binding) {
-            val entries = ArrayList<PieEntry>()
 
-            // NOTE: The order of the entries when being added to the entries array determines their position around the center of
-            // the chart.
-            for (i in 0 until count) {
-                entries.add(
-                    PieEntry(
-                        (Math.random() * range + range / 5).toFloat(),
-                        parties[i % parties.size],
-                    )
-                )
-            }
-            val dataSet = PieDataSet(entries, "Election Results")
+            val dataSet = PieDataSet(entries, "")
             dataSet.setDrawIcons(false)
             dataSet.sliceSpace = 3f
             dataSet.iconsOffset = MPPointF(0f, 40f)
@@ -101,14 +124,11 @@ class PieChartFragment : BaseFragment<FragmentPieChartBinding>(FragmentPieChartB
 
             // add a lot of colors
             val colors = ArrayList<Int>()
-            for (c in ColorTemplate.VORDIPLOM_COLORS) colors.add(c)
             for (c in ColorTemplate.JOYFUL_COLORS) colors.add(c)
             for (c in ColorTemplate.COLORFUL_COLORS) colors.add(c)
-            for (c in ColorTemplate.LIBERTY_COLORS) colors.add(c)
-            for (c in ColorTemplate.PASTEL_COLORS) colors.add(c)
-            colors.add(ColorTemplate.getHoloBlue())
+
             dataSet.colors = colors
-            //dataSet.setSelectionShift(0f);
+            dataSet.selectionShift = 0f;
             val data = PieData(dataSet)
             data.setValueFormatter(PercentFormatter())
             data.setValueTextSize(11f)

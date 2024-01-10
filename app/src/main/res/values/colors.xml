@@ -5,4 +5,5 @@
     <color name="blue_80">#1B75C4</color>
     <color name="green_80">#1CC861</color>
     <color name="orange_80">#E19037</color>
+    <color name="bg">#efefef</color>
 </resources>

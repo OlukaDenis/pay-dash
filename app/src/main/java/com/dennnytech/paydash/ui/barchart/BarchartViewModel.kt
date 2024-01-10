@@ -1,4 +1,4 @@
-package com.dennnytech.paydash.barchart
+package com.dennnytech.paydash.ui.barchart
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

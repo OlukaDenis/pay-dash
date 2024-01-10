@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/byCategory"
+        android:title="@string/revenue_by_category" />
+
+    <item
+        android:id="@+id/byService"
+        android:title="@string/revenue_by_service" />
+
+    <item
+        android:id="@+id/byType"
+        android:title="@string/revenue_by_type" />
+
+</menu>

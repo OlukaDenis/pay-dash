@@ -1,4 +1,4 @@
-package com.dennnytech.paydash.linechart
+package com.dennnytech.paydash.ui.linechart
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

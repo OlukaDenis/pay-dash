@@ -3,4 +3,10 @@
     <string name="first_time_use_text">Preparing app for the first time use. This can take a while</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="payway_dashboard">Payway Dashboard</string>
+    <string name="transactions_by_period">Transactions by period</string>
+    <string name="revenue">Revenue</string>
+    <string name="revenue_by_type">Revenue By Type</string>
+    <string name="revenue_by_service">Revenue By Service</string>
+    <string name="revenue_by_category">Revenue By Category</string>
 </resources>
