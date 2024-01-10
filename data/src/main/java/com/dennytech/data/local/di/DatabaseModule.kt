@@ -10,7 +10,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-const val APP_DATABASE_DB = "payway7.db"
+const val APP_DATABASE_DB = "payway10.db"
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {

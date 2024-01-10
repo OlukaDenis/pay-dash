@@ -72,7 +72,7 @@ class LineChartFragment :
             leftAxis.setDrawAxisLine(false)
             leftAxis.setDrawZeroLine(false)
             leftAxis.setDrawGridLines(false)
-            leftAxis.valueFormatter = AmountYAxisFormatter()
+//            leftAxis.valueFormatter = AmountYAxisFormatter()
             leftAxis.textColor = Color.GRAY
             leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)
             leftAxis.axisLineColor = Color.WHITE

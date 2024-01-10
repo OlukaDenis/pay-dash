@@ -28,7 +28,6 @@ class MainViewModel @Inject constructor(
 
     private fun init() {
         val tranCount = runBlocking { transactionCountUseCase() }
-        Timber.d("Transaction Count: $tranCount")
 
         viewModelScope.launch {
             if (tranCount == 0) {
@@ -46,6 +45,8 @@ class MainViewModel @Inject constructor(
                         }
                     }
                 }
+            } else {
+                remoteLoading.value = false
             }
         }
     }

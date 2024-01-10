@@ -71,4 +71,6 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
 
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    implementation("androidx.core:core-splashscreen:1.1.0-alpha02")
 }
