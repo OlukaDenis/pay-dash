@@ -3,6 +3,7 @@ package com.dennytech.data.impl
 import com.dennytech.data.local.dao.TransactionDao
 import com.dennytech.domain.models.CategoryAmountDomainModel
 import com.dennytech.domain.models.ServiceAmountDomainModel
+import com.dennytech.domain.models.TransactionDomainModel
 import com.dennytech.domain.models.TypeAmountDomainModel
 import com.dennytech.domain.repository.ChartRepository
 import kotlinx.coroutines.flow.Flow
@@ -13,6 +14,13 @@ class ChartRepositoryImpl @Inject constructor(
 ): ChartRepository {
     override fun getServiceAmountGroup(): Flow<List<ServiceAmountDomainModel>> {
         return transactionDao.getServiceAmountGroup()
+    }
+
+    override fun filterTransactions(
+        startDate: Long,
+        endDate: Long
+    ): Flow<List<TransactionDomainModel>> {
+        return transactionDao.filterTransactionsByPeriod(startDate, endDate)
     }
 
     override fun getTypeAmountGroup(): Flow<List<TypeAmountDomainModel>> {

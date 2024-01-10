@@ -11,5 +11,6 @@ data class TransactionEntity(
     val category: String,
     val service: String,
     val txFinish: String,
+    val date: Long,
     val type: String
 )

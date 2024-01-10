@@ -7,6 +7,7 @@ import com.dennytech.data.base.BaseDao
 import com.dennytech.data.local.models.TransactionEntity
 import com.dennytech.domain.models.CategoryAmountDomainModel
 import com.dennytech.domain.models.ServiceAmountDomainModel
+import com.dennytech.domain.models.TransactionDomainModel
 import com.dennytech.domain.models.TypeAmountDomainModel
 import kotlinx.coroutines.flow.Flow
 
@@ -39,6 +40,10 @@ interface TransactionDao : BaseDao<TransactionEntity> {
                 "GROUP BY type"
     )
     fun getTypeAmountGroup(): Flow<List<TypeAmountDomainModel>>
+
+    @Transaction
+    @Query("SELECT * FROM `transaction` WHERE date BETWEEN :startDate AND :endDate")
+    fun filterTransactionsByPeriod(startDate: Long, endDate: Long): Flow<List<TransactionDomainModel>>
 
     @Query("SELECT COUNT(*) FROM `transaction`")
     fun getCount(): Int

@@ -1,10 +1,13 @@
 package com.dennytech.data.local.mappers
 
+import android.annotation.SuppressLint
 import com.dennytech.data.local.models.TransactionEntity
 import com.dennytech.domain.models.TransactionDomainModel
+import com.dennytech.domain.utils.Helpers
 import javax.inject.Inject
 
 class TransactionEntityMapper @Inject constructor(): BaseLocalMapper<TransactionEntity, TransactionDomainModel> {
+
     override fun toDomain(entity: TransactionEntity): TransactionDomainModel {
         return TransactionDomainModel(
             id = entity.id,
@@ -12,7 +15,8 @@ class TransactionEntityMapper @Inject constructor(): BaseLocalMapper<Transaction
             category = entity.category,
             service = entity.service,
             txFinish = entity.txFinish,
-            type = entity.type
+            type = entity.type,
+            date = entity.date
         )
     }
 
@@ -23,7 +27,8 @@ class TransactionEntityMapper @Inject constructor(): BaseLocalMapper<Transaction
             category = entity.category,
             service = entity.service,
             txFinish = entity.txFinish,
-            type = entity.type
+            type = entity.type,
+            date = entity.date
         )
     }
 }

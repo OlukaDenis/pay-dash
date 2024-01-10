@@ -9,4 +9,10 @@
     <string name="revenue_by_type">Revenue By Type</string>
     <string name="revenue_by_service">Revenue By Service</string>
     <string name="revenue_by_category">Revenue By Category</string>
+    <string name="one_week">One week</string>
+    <string name="_1_week">1 Week</string>
+    <string name="_2_weeks">2 Weeks</string>
+    <string name="_3_weeks">3 Weeks</string>
+    <string name="one_month">One Month</string>
+    <string name="empty_data">Empty data</string>
 </resources>

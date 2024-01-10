@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/byOneWeek"
+        android:title="@string/_1_week" />
+
+    <item
+        android:id="@+id/byTwoWeek"
+        android:title="@string/_2_weeks" />
+
+    <item
+        android:id="@+id/byThreeWeek"
+        android:title="@string/_3_weeks" />
+
+    <item
+        android:id="@+id/byOnMonth"
+        android:title="@string/one_month" />
+
+</menu>
